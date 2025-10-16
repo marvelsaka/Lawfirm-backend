@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000; // <-- use Render's port if available
 
 // Middleware
 app.use(cors());
@@ -17,15 +17,9 @@ app.post("/contact", (req, res) => {
   res.json({ success: true, message: "Message received successfully!" });
 });
 
-// Start the server
+// ✅ Only one server listener
 app.listen(PORT, () => {
   console.log(`✅ Server running on http://localhost:${PORT}`);
 });
 
 
-
-
-// Start the server
-app.listen(PORT, () => {
-  console.log(`✅ Server running on http://localhost:${PORT}`);
-});
