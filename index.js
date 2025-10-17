@@ -7,6 +7,11 @@ const PORT = process.env.PORT || 3000; // <-- use Render's port if available
 app.use(cors());
 app.use(express.json());
 
+// ✅ Default route (this fixes "Cannot GET /")
+app.get("/", (req, res) => {
+  res.send("Backend is running successfully 🚀");
+});
+
 // POST route for contact form
 app.post("/contact", (req, res) => {
   const { name, email, message } = req.body;
@@ -21,5 +26,6 @@ app.post("/contact", (req, res) => {
 app.listen(PORT, () => {
   console.log(`✅ Server running on http://localhost:${PORT}`);
 });
+
 
 
