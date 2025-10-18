@@ -33,8 +33,8 @@ app.post("/contact", async (req, res) => {
 
     // Send the email
     await transporter.sendMail({
-      from: `"${name}" <info@yourdomain.com>`, // from your firm email
-      to: "info@yourdomain.com", // where you’ll receive it
+      from: `"${name}" <info@lawanandassociate.com>`, // from your firm email
+      to: "info@lawanandassociate.com", // where you’ll receive it
       subject: `New Contact Message from ${name}`,
       text: `
 Name: ${name}
