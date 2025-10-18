@@ -15,7 +15,7 @@ app.post("/contact", async (req, res) => {
 
   console.log("📩 New message received from website:");
   console.log(`Name: ${name}`);
-  console.log(`Email: ${email}`);
+  console.log(`Email: ${email}`); 
   console.log(`Message: ${message}`);
 
   try {
