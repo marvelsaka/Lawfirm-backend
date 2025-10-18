@@ -15,22 +15,35 @@ app.post("/contact", async (req, res) => {
 
   console.log("📩 New message received from website:");
   console.log(`Name: ${name}`);
-  console.log(`Email: ${email}`); 
+  console.log(`Email: ${email}`);
   console.log(`Message: ${message}`);
 
   try {
-    // Create a transporter using your Namecheap email
-   const nodemailer = require("nodemailer");
+    await resend.emails.send({
+      from: "Lawan & Associate <info@lawanandassociate.com>",
+      to: "info@lawanandassociate.com",
+      subject: `New Contact Message from ${name}`,
+      html: `
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Message:</strong></p>
+        <p>${message}</p>
+      `,
+    });
 
-const transporter = nodemailer.createTransport({
-  host: "smtp.resend.com",
-  port: 587,
-  secure: false,
-  auth: {
-    user: "resend", // fixed value, don't change
-    pass: "re_RUYjpytC_Gbhe3kLNJiKBZV9w1fUzYLrW" // get this from resend.com
+    console.log("✅ Email sent successfully!");
+    res.json({ success: true, message: "Message sent successfully!" });
+  } catch (error) {
+    console.error("❌ Error sending email:", error);
+    res.status(500).json({ success: false, message: "Failed to send email." });
   }
 });
+
+  try {
+    // Create a transporter using your Namecheap email
+  const { Resend } = require("resend");
+const resend = new Resend("re_RUYjpytC_Gbhe3kLNJiKBZV9w1fUzYLrW");
+
 
 
     // Send the email
@@ -51,7 +64,7 @@ Message: ${message}
     console.error("❌ Error sending email:", error);
     res.status(500).json({ success: false, message: "Failed to send email." });
   }
-});
+
 
 // Start server
 app.listen(PORT, () => {
