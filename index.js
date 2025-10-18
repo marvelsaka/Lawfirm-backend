@@ -20,16 +20,18 @@ app.post("/contact", async (req, res) => {
 
   try {
     // Create a transporter using your Namecheap email
-    const transporter = nodemailer.createTransport({
-      host: "mail.privateemail.com",
-      port: 465,
-      secure: true, // use SSL
-     auth: {
-  user: process.env.EMAIL_USER,
-  pass: process.env.EMAIL_PASS
-}
+   const nodemailer = require("nodemailer");
 
-    });
+const transporter = nodemailer.createTransport({
+  host: "smtp.resend.com",
+  port: 587,
+  secure: false,
+  auth: {
+    user: "resend", // fixed value, don't change
+    pass: "re_RUYjpytC_Gbhe3kLNJiKBZV9w1fUzYLrW" // get this from resend.com
+  }
+});
+
 
     // Send the email
     await transporter.sendMail({
